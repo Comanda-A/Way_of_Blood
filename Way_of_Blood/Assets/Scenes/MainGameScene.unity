@@ -3818,7 +3818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MeleeEnemyPrefab: {fileID: 8521287489001304661, guid: 6cad0ea5b8aa0c64382b9b7c34ad4709, type: 3}
   RangedEnemyPrefab: {fileID: 8521287489001304661, guid: cd2f9f383ac59754ab3413d42d94b6dc, type: 3}
-  maxEnemies: 20
+  maxEnemies: 1
   spawnInterval: 1
   spawnDistance: 5
   meleeEnemyChance: 0.5
@@ -4257,6 +4257,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &83311344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 83311346}
+  - component: {fileID: 83311345}
+  m_Layer: 0
+  m_Name: Google_sheets_service
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &83311345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83311344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97f3e93450fd2d45862279a2c6c21a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateInterval: 5
+  config: {fileID: 11400000, guid: 5819604c864dccb4bbac218763d19734, type: 2}
+--- !u!4 &83311346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83311344}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &83937067
 GameObject:
   m_ObjectHideFlags: 0
@@ -50643,6 +50689,10 @@ PrefabInstance:
       propertyPath: AimLockStrength
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3807228901860612156, guid: dfcc1857345fb24498ccbbe9e23b7ac3, type: 3}
+      propertyPath: EnemyLayerMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 3914636203904372062, guid: dfcc1857345fb24498ccbbe9e23b7ac3, type: 3}
       propertyPath: go
       value: 
@@ -50671,6 +50721,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8521287489001304661, guid: dfcc1857345fb24498ccbbe9e23b7ac3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1307432886}
+    - targetCorrespondingSourceObject: {fileID: 8521287489001304661, guid: dfcc1857345fb24498ccbbe9e23b7ac3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1307432903}
   m_SourcePrefab: {fileID: 100100000, guid: dfcc1857345fb24498ccbbe9e23b7ac3, type: 3}
 --- !u!1 &1005237423
 GameObject:
@@ -63775,6 +63828,18 @@ MonoBehaviour:
   DebugEnabled: 1
   DebugMoveDirection: 1
   DebugViewDirection: 1
+--- !u!114 &1307432903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307432869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8046c354cdf10274387163d464054a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1307725530
 GameObject:
   m_ObjectHideFlags: 0
@@ -98669,6 +98734,7 @@ SceneRoots:
   - {fileID: 1569810036}
   - {fileID: 1155738030}
   - {fileID: 754280315}
+  - {fileID: 83311346}
   - {fileID: 893639661}
   - {fileID: 118740767}
   - {fileID: 71588460}

@@ -8,13 +8,14 @@ namespace WayOfBlood.Character.Player
     public class PlayerShot : CharacterShot
     {
         [Header("Shooting settings")]
+        [GoogleSheetsVariable("config", "BulletRadiusAtShot", "Value")]
         public float BulletRadiusAtShot = 0.8f;     // Радиус стрельбы
 
         [Header("Auto aiming")]
         public float AimAssistRadius = 15f;         // Радиус помощи прицеливания
         public float AimAssistAngle = 45f;          // Угол помощи прицеливания
         public float AimLockStrength = 10f;         // Сила доводки прицела
-        public float AutoAimInterval = 0.1f;        // Интервал для проверки автоприцеливания
+        public LayerMask EnemyLayerMask;            // Слой с врагами
 
         private Transform _transform;
         private Camera _mainCamera;
@@ -48,7 +49,7 @@ namespace WayOfBlood.Character.Player
         // Метод для получения цели для автоприцеливания
         private Transform GetAutoAimTarget(Vector2 viewDirection)
         {
-            Collider2D[] enemies = Physics2D.OverlapCircleAll(_transform.position, AimAssistRadius, LayerMask.GetMask("Enemy"));
+            Collider2D[] enemies = Physics2D.OverlapCircleAll(_transform.position, AimAssistRadius, EnemyLayerMask);
 
             Transform bestTarget = null;
             float closestAngle = AimAssistAngle / 2;
@@ -139,7 +140,7 @@ namespace WayOfBlood.Character.Player
         {
             while (_aimMode)
             {
-                Transform autoAimTarget = GetAutoAimTarget(_playerMovement.ViewDirection);
+                Transform autoAimTarget = GetAutoAimTarget(_playerMovement.GetViewDirectionInput());
 
                 if (autoAimTarget != null)
                 {
@@ -150,8 +151,7 @@ namespace WayOfBlood.Character.Player
                 {
                     _playerMovement.ViewDirectionSetting = PlayerMovement.ViewDirectionMode.Free;
                 }
-
-                // Пауза между проверками
+                    
                 yield return null;
             }
 

@@ -25,31 +25,8 @@ namespace WayOfBlood.Character
             characterMovement = GetComponent<CharacterMovement>();
         }
 
-        public void Get()
-        {
-            // Получаем направление взгляда игрока
-            Vector2 kickDirection = characterMovement.ViewDirection;
-
-            // Находим всех врагов в радиусе атаки
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, KickingRadius, KickMask);
-
-            // Проходим по всем найденным врагам
-            foreach (var enemy in hitEnemies)
-            {
-                // Вычисляем направление от игрока к врагу
-                Vector2 directionToEnemy = (enemy.transform.position - transform.position).normalized;
-
-                // Проверяем, находится ли враг в пределах угла атаки
-                if (Vector2.Angle(kickDirection, directionToEnemy) < AngleKick / 2)
-                {
-                    
-                }
-            }
-        }
-
         public void Kick()
         {
-
             if (Time.time > lastKickTime + KickCooldown)
             {
                 ProcessKick();

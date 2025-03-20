@@ -4,8 +4,6 @@ namespace WayOfBlood.Character
 {
     public class CharacterDebug : MonoBehaviour
     {
-
-
         /// <summary>
         /// Отладка сущности.
         /// </summary>

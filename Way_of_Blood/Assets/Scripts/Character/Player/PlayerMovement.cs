@@ -117,17 +117,7 @@ namespace WayOfBlood.Character.Player
 
         public Vector2 GetViewDirectionInput()
         {
-            Vector2 direction = Vector2.zero;
-
-            switch (_controlInput.CurrentInputType)
-            {
-                case ControlInput.InputType.Keyboard:
-                case ControlInput.InputType.Gamepad:
-                case ControlInput.InputType.Touch:
-                    return MoveDirection;
-                default:
-                    return Vector2.zero;
-            }
+            return GetMoveDirectionInput();
         }
 
 
