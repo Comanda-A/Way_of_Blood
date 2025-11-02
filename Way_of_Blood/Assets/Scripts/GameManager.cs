@@ -12,10 +12,39 @@ namespace WayOfBlood.GameManager
 
         private void Start()
         {
-            playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-            playerController.OnDeath += OnDeathPlayer;
+            Application.targetFrameRate = 60;
+
+            var player = GetPlayer();
+            if (player != null)
+            {
+                playerController = player.GetComponent<PlayerController>();
+                playerController.OnDeath += OnDeathPlayer;
+            }
+            else
+            {
+                Debug.LogError("PlayerController not found!");
+            }
         }
-        
+
+        // метод для получения PlayerController
+        public static GameObject GetPlayer()
+        {
+            // Находим все объекты с тегом "Player" (включая неактивные)
+            GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+
+            foreach (GameObject playerObj in playerObjects)
+            {
+                // Проверяем, есть ли компонент PlayerController у объекта
+                PlayerController controller = playerObj.GetComponent<PlayerController>();
+                if (controller != null)
+                {
+                    return playerObj;
+                }
+            }
+
+            return null;
+        }
+
         private void OnDeathPlayer()
         {
             DefeatScreen.SetActive(true);
@@ -29,7 +58,10 @@ namespace WayOfBlood.GameManager
 
         private void OnDestroy()
         {
-            playerController.OnDeath -= OnDeathPlayer;
+            if (playerController != null)
+            {
+                playerController.OnDeath -= OnDeathPlayer;
+            }
         }
 
         public void QuitGame()

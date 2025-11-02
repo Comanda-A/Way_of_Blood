@@ -6,8 +6,8 @@ namespace WayOfBlood.Character.Player
     public class PlayerHealth : CharacterHealth
     {
         [Header("Shields parameters")]
-        public int    ShieldsCount;   // Количество щитов
-        public int      ShieldCost;     // Стоимость щита в единицах крови
+        public int ShieldsCount;   // Количество щитов
+        public int ShieldCost;     // Стоимость щита в единицах крови
 
         private CharacterBlood  _characterBlood;
         private Coroutine       _regenerationCoroutine;

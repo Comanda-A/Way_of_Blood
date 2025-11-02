@@ -109,7 +109,7 @@ Animator:
   m_GameObject: {fileID: 8521287489001304661}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: da5c92877d4be18409bb4cbe81ce5dd4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0a45e179ed4c8c447bd5bd01c2659c8b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -322,11 +322,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackDamage: 1
   AttackCooldown: 1
-  HittingAngle: 150
-  AttackRadius: 0.9
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &7840637926786425335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb9b7a1405c92b4194909db2d11e96a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultSpeed: 3
+  DefaultSpeed: 4
   DefaultAcceleration: 25
   CurrentSpeed: 0
   CurrentAcceleration: 0

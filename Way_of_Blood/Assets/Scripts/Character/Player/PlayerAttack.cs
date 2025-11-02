@@ -6,7 +6,7 @@ namespace WayOfBlood.Character.Player
     public class PlayerAttack : CharacterAttack
     {
         [Header("Bloodlust bonus on the kill")]
-        public int BloodBonusOnKill = 1;
+        public int BloodBonusForKill = 1;
 
         private PlayerBlood playerBloodlust;
         private InputAction attackAction;
@@ -27,7 +27,8 @@ namespace WayOfBlood.Character.Player
 
         private void DamageHandler(CharacterHealth characterHealth)
         {
-            playerBloodlust.AddBlood(BloodBonusOnKill);
+            playerBloodlust.AddBlood(BloodBonusForKill);
+            Camera.main.GetComponent<CameraController>().ShakeCamera();
         }
 
         protected override void OnDestroy()

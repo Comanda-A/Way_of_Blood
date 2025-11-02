@@ -41,7 +41,7 @@ namespace WayOfBlood.Character.Player
             switch (ViewDirectionSetting)
             {
                 case ViewDirectionMode.FourDirections:
-                    return (viewDirection != Vector2.zero) ? Get4DirectionView(viewDirection) : ViewDirection;
+                    return (viewDirection != Vector2.zero) ? Get4DirectionViewWithHysteresis(viewDirection) : ViewDirection;
                 case ViewDirectionMode.EightDirections:
                     return (viewDirection != Vector2.zero) ? Get8DirectionView(viewDirection) : ViewDirection;
                 case ViewDirectionMode.Free:
@@ -53,19 +53,44 @@ namespace WayOfBlood.Character.Player
             }
         }
 
-        private Vector2 Get4DirectionView(Vector2 moveDirection)
-        {
-            if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y))
-            {
-                return moveDirection.x > 0 ? Vector2.right : Vector2.left;
-            }
-            else
-            {
-                return moveDirection.y > 0 ? Vector2.up : Vector2.down;
-            }
-        }
+		private Vector2 Get4DirectionViewWithHysteresis(Vector2 inputDirection)
+		{
+			Vector2 normalizedInput = inputDirection.normalized;
+			float absX = Mathf.Abs(normalizedInput.x);
+			float absY = Mathf.Abs(normalizedInput.y);
 
-        private Vector2 Get8DirectionView(Vector2 moveDirection)
+			// Мертвая зона для слабых входных сигналов
+			if (absX < 0.3f && absY < 0.3f)
+				return ViewDirection;
+
+			// Определяем кандидатов на новое направление
+			Vector2 horizontalCandidate = (normalizedInput.x > 0) ? Vector2.right : Vector2.left;
+			Vector2 verticalCandidate = (normalizedInput.y > 0) ? Vector2.up : Vector2.down;
+
+			// Выбираем основного кандидата с приоритетом горизонтальным направлениям
+			Vector2 mainCandidate = (absX >= absY) ? horizontalCandidate : verticalCandidate;
+
+			// Проверяем гистерезис на основе углов
+			float currentAngle = Mathf.Atan2(ViewDirection.y, ViewDirection.x);
+			float inputAngle = Mathf.Atan2(normalizedInput.y, normalizedInput.x);
+			float candidateAngle = Mathf.Atan2(mainCandidate.y, mainCandidate.x);
+
+			// Разница углов в радианах (45° = 0.785 рад)
+			float currentInputDiff = Mathf.Abs(Mathf.DeltaAngle(currentAngle * Mathf.Rad2Deg, inputAngle * Mathf.Rad2Deg));
+			float candidateInputDiff = Mathf.Abs(Mathf.DeltaAngle(candidateAngle * Mathf.Rad2Deg, inputAngle * Mathf.Rad2Deg));
+
+			// Меняем направление только если:
+			// - Кандидат значительно ближе к входу чем текущее направление
+			// - Или текущее направление слишком далеко от входа (> 60°)
+			if ((candidateInputDiff + 15f < currentInputDiff) || currentInputDiff > 60f)
+			{
+				ViewDirection = mainCandidate;
+			}
+
+			return ViewDirection;
+		}
+
+		private Vector2 Get8DirectionView(Vector2 moveDirection)
         {
             float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
             if (angle < 0) angle += 360;
@@ -107,6 +132,7 @@ namespace WayOfBlood.Character.Player
             {
                 case ControlInput.InputType.Keyboard:
                 case ControlInput.InputType.Gamepad:
+                    // TODO dead zone
                     return _moveAction.ReadValue<Vector2>().normalized;
                 case ControlInput.InputType.Touch:
                     return _joystick.Direction.normalized;

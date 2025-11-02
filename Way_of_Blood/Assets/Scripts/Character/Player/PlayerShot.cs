@@ -8,14 +8,13 @@ namespace WayOfBlood.Character.Player
     public class PlayerShot : CharacterShot
     {
         [Header("Shooting settings")]
-        [GoogleSheetsVariable("config", "BulletRadiusAtShot", "Value")]
-        public float BulletRadiusAtShot = 0.8f;     // Радиус стрельбы
-
+        public float BulletRadiusAtShot = 0.8f;      // Радиус стрельбы
+        
         [Header("Auto aiming")]
-        public float AimAssistRadius = 15f;         // Радиус помощи прицеливания
-        public float AimAssistAngle = 45f;          // Угол помощи прицеливания
-        public float AimLockStrength = 10f;         // Сила доводки прицела
-        public LayerMask EnemyLayerMask;            // Слой с врагами
+        public float AimAssistRadius = 15f;          // Радиус помощи прицеливания
+        public float AimAssistAngle = 45f;           // Угол помощи прицеливания
+        public float AimLockStrength = 10f;          // Сила доводки прицела
+        public LayerMask EnemyLayerMask;                                // Слой с врагами
 
         private Transform _transform;
         private Camera _mainCamera;

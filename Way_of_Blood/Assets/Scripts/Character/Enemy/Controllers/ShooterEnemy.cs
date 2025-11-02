@@ -49,7 +49,7 @@ namespace WayOfBlood.Character.Enemy
 
             if (distanceToPlayer < SafeDistance * 0.8f)
             {
-                PerformRoll(GetEvadeDirection(_playerMovement.MoveDirection));
+                //PerformRoll(GetEvadeDirection(_playerMovement.MoveDirection));
             }
         }
 

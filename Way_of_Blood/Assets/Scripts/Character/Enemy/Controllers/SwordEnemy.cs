@@ -50,7 +50,7 @@ namespace WayOfBlood.Character.Enemy
             // Проверка на необходимость переката, если игрок слишком близко
             if (Vector2.Distance(transform.position, _player.position) <= AttackRange * 0.8f)
             {
-                PerformRoll(GetEvadeDirection(_playerMovement.MoveDirection));
+                //PerformRoll(GetEvadeDirection(_playerMovement.MoveDirection));
             }
         }
     }

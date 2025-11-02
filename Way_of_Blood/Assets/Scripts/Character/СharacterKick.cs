@@ -7,6 +7,7 @@ namespace WayOfBlood.Character
     public class СharacterKick : MonoBehaviour
     {
         public event UnityAction OnKick;        // Событие удара ногой 
+
         public float KickingRadius = 1f;        // Дистанция для удара ногой
         public float AngleKick = 20;            // Угол для удара ногой
         public float KickCooldown = 0.1f;       // Задержка между ударами
